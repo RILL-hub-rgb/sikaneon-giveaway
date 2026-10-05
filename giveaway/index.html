@@ -1,0 +1,575 @@
+cd ~/web-teman
+mkdir -p giveaway
+cat > giveaway/index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>SIKANEON Giveaway</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+--yellow:#ffd21c;
+--yellow2:#ffbf00;
+--white:#fff;
+--text:#b8b8b8;
+--muted:#777;
+--black:#080808;
+--card:#111;
+--border:#292929;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+background:
+radial-gradient(circle at 50% 0%,#ffd21c12,transparent 35%),
+#080808;
+color:var(--white);
+font-family:Arial,Helvetica,sans-serif;
+min-height:100vh;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(120deg,transparent 0%,#ffd21c04 50%,transparent 100%);
+pointer-events:none;
+}
+
+.wrap{
+width:100%;
+max-width:600px;
+margin:auto;
+padding:18px 15px 40px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:8px 2px 20px;
+}
+
+.logo{
+font-size:18px;
+font-weight:900;
+letter-spacing:-.5px;
+}
+
+.logo span{
+color:var(--yellow);
+}
+
+.brand{
+font-size:10px;
+letter-spacing:3px;
+color:#777;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:42px 10px 30px;
+}
+
+.badge{
+display:inline-block;
+padding:9px 15px;
+border:1px solid #ffd21c35;
+border-radius:30px;
+color:#d5d5d5;
+font-size:11px;
+font-weight:bold;
+letter-spacing:2px;
+background:#ffd21c08;
+margin-bottom:22px;
+}
+
+h1{
+margin:0;
+font-size:42px;
+line-height:1;
+letter-spacing:-2px;
+font-weight:900;
+}
+
+h1 .yellow{
+color:var(--yellow);
+}
+
+h1 .white{
+color:#fff;
+}
+
+.hero p{
+max-width:480px;
+margin:20px auto 0;
+font-size:15px;
+line-height:1.8;
+color:#aaa;
+}
+
+/* BUTTON */
+
+.buttons{
+display:flex;
+gap:10px;
+margin-top:25px;
+}
+
+.btn{
+flex:1;
+padding:15px 12px;
+border-radius:13px;
+text-align:center;
+text-decoration:none;
+font-weight:900;
+font-size:13px;
+border:1px solid var(--border);
+transition:.2s;
+}
+
+.btn-main{
+background:var(--yellow);
+color:#080808;
+box-shadow:0 0 25px #ffd21c20;
+}
+
+.btn-main:hover{
+background:#ffe052;
+transform:translateY(-2px);
+}
+
+.btn-dark{
+background:#111;
+color:#fff;
+}
+
+.btn-dark:hover{
+border-color:#ffd21c55;
+}
+
+/* PRIZE */
+
+.section-title{
+margin:35px 0 15px;
+font-size:25px;
+font-weight:900;
+}
+
+.section-title span{
+color:var(--yellow);
+}
+
+.prize{
+background:linear-gradient(145deg,#151515,#0d0d0d);
+border:1px solid #292929;
+border-radius:20px;
+padding:23px;
+box-shadow:0 0 30px #ffd21c08;
+}
+
+.prize-top{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.prize-icon{
+width:55px;
+height:55px;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+background:#ffd21c12;
+border:1px solid #ffd21c30;
+}
+
+.prize h2{
+margin:0;
+font-size:19px;
+}
+
+.money{
+color:var(--yellow);
+font-size:30px;
+font-weight:900;
+margin-top:4px;
+}
+
+.divider{
+height:1px;
+background:#292929;
+margin:20px 0;
+}
+
+.rules{
+display:grid;
+gap:13px;
+}
+
+.rule{
+display:flex;
+gap:11px;
+align-items:flex-start;
+color:#bbb;
+font-size:14px;
+line-height:1.5;
+}
+
+.rule b{
+color:#fff;
+}
+
+.num{
+width:25px;
+height:25px;
+min-width:25px;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#ffd21c;
+color:#080808;
+font-weight:900;
+font-size:12px;
+}
+
+/* FORM */
+
+.form-card{
+margin-top:18px;
+background:#101010;
+border:1px solid #292929;
+border-radius:20px;
+padding:22px;
+}
+
+.form-card h2{
+margin:0 0 5px;
+font-size:21px;
+}
+
+.form-card .hint{
+color:#777;
+font-size:12px;
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin:15px 0 7px;
+font-size:13px;
+font-weight:bold;
+color:#ddd;
+}
+
+input,textarea{
+width:100%;
+border:1px solid #303030;
+background:#080808;
+color:#fff;
+border-radius:11px;
+padding:13px;
+font-size:14px;
+outline:none;
+font-family:inherit;
+}
+
+input:focus,textarea:focus{
+border-color:#ffd21c;
+box-shadow:0 0 15px #ffd21c12;
+}
+
+textarea{
+min-height:105px;
+resize:vertical;
+}
+
+.submit{
+width:100%;
+border:0;
+margin-top:20px;
+padding:15px;
+border-radius:12px;
+background:var(--yellow);
+color:#080808;
+font-weight:900;
+font-size:14px;
+cursor:pointer;
+box-shadow:0 0 25px #ffd21c18;
+}
+
+.submit:hover{
+background:#ffe052;
+}
+
+.submit:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
+
+.msg{
+text-align:center;
+font-size:13px;
+line-height:1.6;
+margin-top:15px;
+}
+
+.success{color:#7dff9c}
+.error{color:#ff7777}
+
+/* CHANNEL */
+
+.channel{
+margin-top:18px;
+padding:20px;
+border-radius:18px;
+background:#111;
+border:1px solid #292929;
+text-align:center;
+}
+
+.channel small{
+display:block;
+color:#777;
+margin-bottom:7px;
+}
+
+.channel strong{
+display:block;
+font-size:17px;
+margin-bottom:13px;
+}
+
+.channel a{
+display:inline-block;
+padding:11px 18px;
+border-radius:10px;
+background:#ffd21c;
+color:#080808;
+font-size:12px;
+font-weight:900;
+text-decoration:none;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+margin-top:30px;
+color:#555;
+font-size:10px;
+letter-spacing:2px;
+}
+
+.footer b{
+color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:420px){
+h1{font-size:36px}
+.hero{padding-top:30px}
+.buttons{flex-direction:column}
+.btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="header">
+<div class="logo">⚡ <span>SIKANEON</span></div>
+<div class="brand">GIVEAWAY</div>
+</header>
+
+<section class="hero">
+
+<div class="badge">SIKANEON • GIVEAWAY</div>
+
+<h1>
+<span class="yellow">GIVE</span><span class="white">AWAY</span>
+</h1>
+
+<p>
+Ikuti challenge SIKANEON dan dapatkan kesempatan
+memenangkan hadiah spesial.
+</p>
+
+<div class="buttons">
+<a class="btn btn-main" href="#daftar">DAFTAR SEKARANG</a>
+<a class="btn btn-dark" href="#aturan">LIHAT ATURAN</a>
+</div>
+
+</section>
+
+<h2 class="section-title">
+🏆 <span>HADIAH</span>
+</h2>
+
+<div class="prize">
+
+<div class="prize-top">
+
+<div class="prize-icon">🎁</div>
+
+<div>
+<h2>Hadiah Utama</h2>
+<div class="money">Rp50.000</div>
+</div>
+
+</div>
+
+<div class="divider"></div>
+
+<div class="rules" id="aturan">
+
+<div class="rule">
+<div class="num">1</div>
+<div>Buat <b>VT TikTok</b> untuk mempromosikan saluran SIKANEON.</div>
+</div>
+
+<div class="rule">
+<div class="num">2</div>
+<div>Target minimal <b>7.000 views</b>.</div>
+</div>
+
+<div class="rule">
+<div class="num">3</div>
+<div><b>Tag atau mention</b> saluran SIKANEON pada konten.</div>
+</div>
+
+<div class="rule">
+<div class="num">4</div>
+<div>Kirim <b>link VT TikTok</b> melalui form pendaftaran.</div>
+</div>
+
+<div class="rule">
+<div class="num">5</div>
+<div>Hanya ada <b>1 pemenang</b>.</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="channel">
+
+<small>Saluran yang dipromosikan</small>
+
+<strong>⚡ SIKANEON</strong>
+
+<a href="#" target="_blank" rel="noopener">
+📲 BUKA SALURAN
+</a>
+
+</div>
+
+<div class="form-card" id="daftar">
+
+<h2>📝 Daftar Giveaway</h2>
+
+<div class="hint">
+Isi data dengan benar. Views akan diperiksa oleh admin melalui link VT yang dikirim.
+</div>
+
+<form id="form">
+
+<label>Username TikTok</label>
+<input
+id="username"
+type="text"
+placeholder="@username"
+required
+>
+
+<label>Link VT TikTok</label>
+<input
+id="link"
+type="url"
+placeholder="https://www.tiktok.com/..."
+required
+>
+
+<label>Kenapa mau ikut giveaway?</label>
+<textarea
+id="reason"
+placeholder="Tulis alasan kamu..."
+required
+></textarea>
+
+<button class="submit" id="submit" type="submit">
+🚀 DAFTAR GIVEAWAY
+</button>
+
+<div id="msg" class="msg"></div>
+
+</form>
+
+</div>
+
+<div class="footer">
+SIKANEON GIVEAWAY • <b>SIKANEON</b>
+</div>
+
+</div>
+
+<script>
+const form=document.getElementById("form");
+const btn=document.getElementById("submit");
+const msg=document.getElementById("msg");
+
+form.addEventListener("submit",async e=>{
+e.preventDefault();
+
+btn.disabled=true;
+btn.textContent="⏳ MENGIRIM...";
+msg.className="msg";
+msg.textContent="";
+
+const username=document.getElementById("username").value.trim();
+const link=document.getElementById("link").value.trim();
+const reason=document.getElementById("reason").value.trim();
+
+try{
+
+/*
+Jika nanti sudah memakai backend,
+bagian fetch ini bisa diarahkan ke API.
+*/
+
+msg.className="msg success";
+msg.innerHTML=
+"✅ <b>Data siap dikirim!</b><br>"+
+"Backend giveaway belum dihubungkan.";
+
+}catch(err){
+
+msg.className="msg error";
+msg.textContent="❌ Terjadi kesalahan.";
+
+}
+
+btn.disabled=false;
+btn.textContent="🚀 DAFTAR GIVEAWAY";
+});
+</script>
+
+</body>
+</html>
